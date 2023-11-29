@@ -1,0 +1,19 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Backend package for social media clone",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ayothegod/twitter-clone.git"
+  },
+  "author": "Ayomide",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ayothegod/twitter-clone/issues"
+  },
+  "homepage": "https://github.com/Ayothegod/twitter-clone#readme"
+}
