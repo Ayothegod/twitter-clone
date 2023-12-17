@@ -6,7 +6,7 @@ import Header from "../components/ui/Header";
 
 export default function Home() {
   return (
-    <main className="container mx-auto px-2 py-2">
+    <main className="container mx-auto px-2 py-2 font-sans">
       <Header homepage={true}/>
     </main>
   )
