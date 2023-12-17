@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .btn {
+        @apply bg-slate-200 font-semibold w-full py-1 px-2 rounded-full placeholder:text-slate-600 placeholder:text-sm;
+    }
+}

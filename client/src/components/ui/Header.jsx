@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
 import testProfile from "../../assets/20220529_232847.jpg";
+import { Settings, Settings2 } from "lucide-react";
 
 export default function Header({
   homepage,
   searchpage,
   notification,
-  message
+  message,
 }) {
   return (
     <div className="border-b pb-2 mx-2">
@@ -22,12 +23,30 @@ export default function Header({
               <p className=" font-bold text-2xl">Tweeter.</p>
             </div>
           )}
-          {searchpage && <p>searchpage</p>}
-          {notification && <p>Notification</p>}
+          {searchpage && (
+            <div className="flex items-center justify-between gap-4">
+              <input
+                type="text"
+                placeholder="Search Tweeter"
+                className="btn"
+              />
+              <Settings />
+            </div>
+          )}
+          {notification && (
+            <div className="flex items-center justify-between gap-4">
+              <p className="font-bold text-2xl">Notifications</p>
+              <Settings />
+            </div>
+          )}
           {message && (
-            <div>
-              <input type="text" className="bg-slate-200"/>
-              
+            <div className="flex items-center justify-between gap-4">
+              <input
+                type="text"
+                placeholder="Search Direct Messages"
+                className="btn"
+              />
+              <Settings />
             </div>
           )}
         </div>
