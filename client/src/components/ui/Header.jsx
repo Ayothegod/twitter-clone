@@ -8,7 +8,7 @@ export default function Header({
   message,
 }) {
   return (
-    <div className="border-b pb-2">
+    <div className="border-b pb-2 mx-2">
       {/* mobile */}
       <div className="flex items-center gap-4">
         <img
