@@ -1,4 +1,4 @@
-export const appData = [
+export const usersData = [
     {
       "id": "1",
       "username": "user1",
@@ -67,5 +67,3 @@ export  const followData = [
     }
   ]
 
-
-console.log(appData, posts, followData);

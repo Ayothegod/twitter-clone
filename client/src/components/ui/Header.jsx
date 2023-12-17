@@ -1,13 +1,18 @@
 /* eslint-disable react/prop-types */
 import testProfile from "../../assets/20220529_232847.jpg";
-import { Settings, Settings2 } from "lucide-react";
-
+import { Settings } from "lucide-react";
+import MobileSidebar from "./MobileSidebar";
+import { useActionStore } from "../../lib/stores/actionStore";
+// Settings2
 export default function Header({
   homepage,
   searchpage,
   notification,
   message,
 }) {
+  const updateOpenSidebar = useActionStore((state) => state.updateOpenSidebar);
+  const openSidebar = useActionStore((state) => state.openSidebar);
+
   return (
     <div className="border-b pb-2 mx-2">
       {/* mobile */}
@@ -15,8 +20,11 @@ export default function Header({
         <img
           src={testProfile}
           alt="test-image"
-          className="h-10 w-10 rounded-full"
+          className="h-10 w-10 rounded-full cursor-pointer"
+          onClick={updateOpenSidebar}
         />
+        {openSidebar && <MobileSidebar/>}
+        
         <div className="w-full">
           {homepage && (
             <div className=" flex items-center justify-center">
@@ -25,11 +33,7 @@ export default function Header({
           )}
           {searchpage && (
             <div className="flex items-center justify-between gap-4">
-              <input
-                type="text"
-                placeholder="Search Tweeter"
-                className="btn"
-              />
+              <input type="text" placeholder="Search Tweeter" className="btn" />
               <Settings />
             </div>
           )}
