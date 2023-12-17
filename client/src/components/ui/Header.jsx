@@ -5,7 +5,7 @@ export default function Header({
   homepage,
   searchpage,
   notification,
-  message,
+  message
 }) {
   return (
     <div className="border-b pb-2 mx-2">
@@ -24,7 +24,12 @@ export default function Header({
           )}
           {searchpage && <p>searchpage</p>}
           {notification && <p>Notification</p>}
-          {message && <p>Message</p>}
+          {message && (
+            <div>
+              <input type="text" className="bg-slate-200"/>
+              
+            </div>
+          )}
         </div>
       </div>
 
