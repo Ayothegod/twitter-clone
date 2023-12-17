@@ -1,14 +1,14 @@
-// Tweeter
+import { Route, Routes } from "react-router-dom";
+import Home from "./pages/Home"
 
 function App() {
   return (
-    <main>
-      <p>Time to double down on building</p>
-      <p>Time to build mad stuff</p>
-      <p>Time to build mad stuff</p>
-
-    </main>
-  );
+<>
+    <Routes>
+      <Route  element={<Home/>}></Route>
+    </Routes>
+</>
+    )
 }
 
 export default App;
