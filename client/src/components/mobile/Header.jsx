@@ -14,7 +14,7 @@ export default function Header({
   const openSidebar = useActionStore((state) => state.openSidebar);
 
   return (
-    <div className="border-b pb-2 mx-2">
+    <div className="border-b pb-2 mx-2 sm:hidden">
       {/* mobile */}
       <div className="flex items-center gap-4">
         <img

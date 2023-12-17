@@ -1,5 +1,5 @@
-import Footer from "../components/ui/Footer";
-import Header from "../components/ui/Header";
+import Footer from "../components/mobile/Footer";
+import Header from "../components/mobile/Header";
 
 export default function Search() {
   return (

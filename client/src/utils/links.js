@@ -7,6 +7,8 @@ import {
   Search,
   Bell,
   Mail,
+  MoreVertical,
+  Pen,
 } from "lucide-react";
 
 export const mobileSidebarLinks = [
@@ -21,4 +23,16 @@ export const footerLinks = [
   { to: "search", icon: Search },
   { to: "notification", icon: Bell },
   { to: "message", icon: Mail },
+];
+
+export const sidebarLinks = [
+  { to: "home", icon: Twitter, text: "", logo: true },
+  { to: "home", icon: Home, text: "Home" },
+  { to: "search", icon: Search, text: "Explore" },
+  { to: "notification", icon: Bell, text: "Notification" },
+  { to: "message", icon: Mail, text: "Message" },
+  { to: "premium", icon: Twitter, text: "Premium" },
+  { to: "profile", icon: UserRound, text: "Profile" },
+  { to: "more", icon: MoreVertical, text: "More" },
+  { to: "home", icon: Pen, text: "Tweet" },
 ];

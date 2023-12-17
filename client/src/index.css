@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    .body {
+        display: grid;
+        grid-template-columns: minmax(200px, calc(100vw-200px));
+    }
+}
 @layer components {
     .btn {
         @apply bg-slate-200 font-semibold w-full py-1 px-2 rounded-full placeholder:text-slate-600 placeholder:text-sm;
