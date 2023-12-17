@@ -14,8 +14,10 @@ const user = {
 
 export const useActionStore = create((set) => ({
     openSidebar: false,
+    isSettingsDropdown: false,
     user: user,
     updateOpenSidebar: () => set((state) => ({ openSidebar: !state.openSidebar })),
+    updateIsSettingsDropdown: () => set((state) => ({ isSettingsDropdown: !state.isSettingsDropdown })),
     // removeAllBears: () => set({ bears: 0 }),
   }))
   

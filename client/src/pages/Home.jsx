@@ -9,6 +9,7 @@ export default function Home() {
   return (
     <main className="container mx-auto py-2 font-sans relative">
       <Header homepage={true}/>
+      
       <Footer/>
     </main>
   )
