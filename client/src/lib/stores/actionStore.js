@@ -15,8 +15,10 @@ const user = {
 export const useActionStore = create((set) => ({
     openSidebar: false,
     isSettingsDropdown: false,
+    authVariant: false,
     user: user,
     updateOpenSidebar: () => set((state) => ({ openSidebar: !state.openSidebar })),
+    updateAuthVariant: () => set((state) => ({ authVariant: !state.authVariant })),
     updateIsSettingsDropdown: () => set((state) => ({ isSettingsDropdown: !state.isSettingsDropdown })),
     // removeAllBears: () => set({ bears: 0 }),
   }))

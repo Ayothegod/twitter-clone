@@ -8,7 +8,7 @@ import { Copyright } from "lucide-react";
 export default function Recommend() {
   const post = posts.filter((post) => post.user_id == 1);
   return (
-    <div className="hidden xl:block p-4 space-y-4">
+    <div className="hidden xl:block p-4 space-y-4 border-l">
       {/* search */}
       <div className="sticky top-0 bg-white">
         <input
