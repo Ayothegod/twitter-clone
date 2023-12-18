@@ -6,15 +6,15 @@ import Post from "../ui/Post";
 export default function Body() {
   return (
     <div className="min-h-screen w-full">
-      <header className="p-4 border-b">
-        <div className="hidden sm:flex items-center justify-between">
-          <p className="font-bold text-xl"> Home</p>
+      <header className="p-4 border-b sticky top-0 bg-white/80">
+        <div className="hidden sm:flex items-center justify-between ">
+          <p className="font-bold text-xl"> For you</p>
           <Settings />
         </div>
-        <div>
-          <p className="text-center font-semibold">For you</p>
-          {/* Incase i want to add a followings only view */}
-        </div>
+        {/* <div className="">
+          <p className="text-center font-semibold"></p>
+          Incase i want to add a followings only view
+        </div> */}
       </header>
 
       <CreatePost />

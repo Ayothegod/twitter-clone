@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import { posts, usersData } from "../../utils/mockData";
 import Post from "../ui/Post";
 import UserFollowCard from "../ui/UserFollowCard";
+import { Copyright } from "lucide-react";
 
 export default function Recommend() {
   const post = posts.filter((post) => post.user_id == 1);
   return (
     <div className="hidden xl:block p-4 space-y-4">
       {/* search */}
-      <div>
+      <div className="sticky top-0 bg-white">
         <input
           type="text"
           placeholder="Search"
@@ -45,6 +46,14 @@ export default function Recommend() {
         }
         <Link to="/">
         <p className="text-action font-semibold">show more</p></Link>
+      </div>
+
+      {/* Footer stuff */}
+      <div className="flex gap-4 flex-wrap text-gray-500 text-sm font-semibold">
+        <p>Privacy Policy</p>
+        <p>Cookie Policy</p>
+        <p>Ads Info</p>
+        <p className="flex items-center"><Copyright className="h-4 w-4"/> 2023 Tweeter. </p>
       </div>
     </div>
   );
