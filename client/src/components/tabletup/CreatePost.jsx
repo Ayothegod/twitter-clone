@@ -22,9 +22,9 @@ export default function CreatePost() {
           type="text"
           ref={textAreaRef}
           onChange={(e) => setValue(e.target.value)}
-          rows={1}
+          rows={0}
           value={value}
-          className="p-2 w-full resize-none"
+          className="p-2 w-full resize-none outline-none"
           placeholder="What is happening?"
         />
         <div className="flex items-center justify-between">
@@ -33,9 +33,12 @@ export default function CreatePost() {
             <StickerIcon className=" text-action hover:text-action-disabled" />
             <LocateIcon className=" text-action hover:text-action-disabled" />
           </div>
-          <button className="bg-action py-2 px-6 rounded-full text-white font-bold hover:bg-action-disabled">
-            Post
-          </button>
+          <div className="flex items-center gap-2">
+            <p className={`text-action font-semibold text-sm ${value.length>150 && "text-red-600"}`}>{value.length}<span className="">/150</span></p>
+            <button className={`bg-action py-2 px-6 rounded-full text-white font-bold hover:bg-action-disabled ${value.length>150 && "bg-action-disabled cursor-not-allowed"}`}>
+              Post
+            </button>
+          </div>
         </div>
       </div>
     </div>
