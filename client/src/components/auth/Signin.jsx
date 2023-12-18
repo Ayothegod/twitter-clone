@@ -15,7 +15,7 @@ export default function Signin() {
   };
 
   return (
-    <main className="mt-20">
+    <main className="mt-20 w-full sm:max-w-[20rem] md:max-w-[30rem] mx-auto">
       <p className="text-xl font-bold mb-4">Sign in to continue</p>
       <form
         action="post"

@@ -14,7 +14,7 @@ export default function Signup() {
   };
 
   return (
-    <main className="mt-20">
+    <main className="mt-20 w-full sm:max-w-[20rem] md:max-w-[30rem] mx-auto">
       <p className="text-xl font-bold mb-4">Sign up to Tweeter</p>
       <form
         action="post"
@@ -83,7 +83,7 @@ export default function Signup() {
             </p>
           )}
         </div>
-        
+
         <button className="solid-btn w-full py-4 bg-action hover:bg-action-disabled mt-8">
           Sign up
         </button>
