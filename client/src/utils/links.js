@@ -34,5 +34,5 @@ export const sidebarLinks = [
   { to: "premium", icon: Twitter, text: "Premium" },
   { to: "profile", icon: UserRound, text: "Profile" },
   { to: "more", icon: MoreVertical, text: "More" },
-  { to: "home", icon: Pen, text: "Tweet" },
+  { to: "tweet", icon: Pen, text: "Tweet" },
 ];

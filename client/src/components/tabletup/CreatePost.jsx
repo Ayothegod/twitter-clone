@@ -28,10 +28,10 @@ export default function CreatePost() {
           placeholder="What is happening?"
         />
         <div className="flex items-center justify-between">
-          <div className="flex gap-4">
-            <ImageIcon className=" text-action hover:text-action-disabled" />
-            <StickerIcon className=" text-action hover:text-action-disabled" />
-            <LocateIcon className=" text-action hover:text-action-disabled" />
+          <div className="flex gap-4 text-sm">
+            <ImageIcon className=" text-action h-5 w-5 hover:text-action-disabled" />
+            <StickerIcon className=" text-action h-5 w-5 hover:text-action-disabled" />
+            <LocateIcon className=" text-action h-5 w-5 hover:text-action-disabled" />
           </div>
           <div className="flex items-center gap-2">
             <p className={`text-action font-semibold text-sm ${value.length>150 && "text-red-600"}`}>{value.length}<span className="">/150</span></p>

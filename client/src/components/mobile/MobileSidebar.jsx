@@ -56,7 +56,7 @@ export default function MobileSidebar() {
           <Link
             to={`/${link.to}`}
             key={idx}
-            className={`flex items-center gap-8 `}
+            className={`flex items-center gap-8 hover:bg-slate-200 p-1 rounded-full`}
           >
             {<link.icon />}
             <p className="font-bold text-2xl">{link.text}</p>
@@ -68,16 +68,16 @@ export default function MobileSidebar() {
       <div className="m-4 py-4 space-y-2">
         <div className="flex items-center justify-between mb-4">
           <p className="font-semibold text-lg"> Settings and Support</p>
-          <MoveDown onClick={updateIsSettingsDropdown} />
+          <MoveDown onClick={updateIsSettingsDropdown} className="cursor-pointer"/>
         </div>
 
         {isSettingsDropdown && (
           <div className="space-y-2 ">
-            <Link to="/" className={`flex items-center gap-8 `}>
+            <Link to="/" className={`flex items-center gap-8 hover:bg-slate-200 p-1 rounded-full`}>
                 <Settings/>
                 <p className="font-bold text-2xl"> Settings and Privacy</p>
             </Link>
-            <Link to="/" className={`flex items-center gap-8 `}>
+            <Link to="/" className={`flex items-center gap-8 hover:bg-slate-200 p-1 rounded-full`}>
                 <HelpCircle/>
                 <p className="font-bold text-2xl">Help Center</p>
             </Link>

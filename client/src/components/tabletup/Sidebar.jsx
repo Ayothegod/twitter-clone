@@ -4,12 +4,12 @@ import testProfile from "../../assets/20220529_232847.jpg";
 
 export default function Sidebar() {
   return (
-    <div className="hidden sm:block space-y-8 py-4 px-2 overflow-y-scroll max-h-screen">
+    <div className="hidden sm:block space-y-4 py-4 px-2 max-h-screen border-r">
       {sidebarLinks.map((link, idx) => (
         <Link
           to={`/${link.to}`}
           key={idx}
-          className={`flex items-center gap-4`}
+          className={`flex items-center gap-4 hover:bg-slate-200 p-1 rounded-full ${link.to==="tweet" && "bg-action text-white font-semibold hover:bg-action"}`}
         >
           {<link.icon className="h-8 w-7" />}
           <p className="hidden 2xl:flex font-bold text-2xl ">{link.text}</p>
