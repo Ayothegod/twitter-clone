@@ -14,7 +14,7 @@ export default function Home() {
       <Header homepage={true}/>
       
       {/* sm upwards */}
-      <div className="flex">
+      <div className="flex xl:body-xl 2xl:body-2xl">
         <Sidebar/>
         <Body/>
         <Recommend/>

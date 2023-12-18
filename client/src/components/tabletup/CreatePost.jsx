@@ -23,7 +23,7 @@ export default function CreatePost() {
             <StickerIcon className=" text-action hover:text-action-disabled" />
             <LocateIcon className=" text-action hover:text-action-disabled" />
           </div>
-          <button className="bg-action py-2 px-4 rounded-full text-white font-bold hover:bg-action-disabled">
+          <button className="bg-action py-2 px-6 rounded-full text-white font-bold hover:bg-action-disabled">
             Post
           </button>
         </div>

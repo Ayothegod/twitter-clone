@@ -3,9 +3,13 @@
 @tailwind utilities;
 
 @layer base {
-    .body {
+    .body-xl {
         display: grid;
-        grid-template-columns: minmax(200px, calc(100vw-200px));
+        grid-template-columns: 100px auto auto;
+    }
+    .body-2xl {
+        display: grid;
+        grid-template-columns: 240px auto auto;
     }
 }
 @layer components {

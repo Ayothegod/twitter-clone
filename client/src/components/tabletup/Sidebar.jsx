@@ -13,7 +13,7 @@ export default function Sidebar() {
           className={`flex items-center gap-4`}
         >
           {<link.icon className="h-8 w-7" />}
-          <p className="hidden xl:block font-bold text-2xl ">{link.text}</p>
+          <p className="hidden 2xl:flex font-bold text-2xl ">{link.text}</p>
         </Link>
       ))}
       <img
@@ -24,3 +24,4 @@ export default function Sidebar() {
     </div>
   );
 }
+// hidden xl:flex

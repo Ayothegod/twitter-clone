@@ -1,5 +1,7 @@
 import { Settings } from "lucide-react";
 import CreatePost from "./CreatePost";
+import { posts } from "../../utils/mockData";
+import Post from "../ui/Post";
 
 export default function Body() {
   return (
@@ -15,8 +17,12 @@ export default function Body() {
         </div>
       </header>
 
-      <CreatePost/>
+      <CreatePost />
 
+      {/* render posts, all post from the database using timestamp */}
+      <div className="p-4 flex flex-col gap-4">
+        {posts && posts.map((post) => <Post key={post.id} {...post} />)}
+      </div>
     </div>
   );
 }
