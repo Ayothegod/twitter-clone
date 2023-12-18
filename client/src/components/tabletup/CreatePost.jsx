@@ -1,7 +1,13 @@
 import { ImageIcon, LocateIcon, StickerIcon } from "lucide-react";
 import testProfile from "../../assets/20220529_232847.jpg";
+import { useState, useRef } from "react";
+import useAutosizeTextArea from "../../lib/hooks/useAutoResizeTextsize";
 
 export default function CreatePost() {
+  const [value, setValue] = useState("");
+  const textAreaRef = useRef(null);
+  useAutosizeTextArea(textAreaRef.current, value);
+
   return (
     <div className="hidden sm:flex gap-4 p-4 w-full border-b ">
       <div className="h-12 w-14">
@@ -14,7 +20,11 @@ export default function CreatePost() {
       <div className="w-full space-y-2">
         <textarea
           type="text"
-          className="p-2 w-full"
+          ref={textAreaRef}
+          onChange={(e) => setValue(e.target.value)}
+          rows={1}
+          value={value}
+          className="p-2 w-full resize-none"
           placeholder="What is happening?"
         />
         <div className="flex items-center justify-between">
