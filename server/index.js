@@ -11,7 +11,7 @@ const port = process.env.PORT || 4001;
 
 // middlewares
 app.use(morgan("dev"));
-app.use(multer());
+app.use(multer);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -22,10 +22,10 @@ app.use(express.urlencoded({ extended: false }));
 const startDb = () => {
   mongoose
     .connect(process.env.DATABASE_URL)
-    .then((res) => console.log(res, "database connected"))
+    .then((res) => console.log( "database connected"))
     .catch((e) => console.log(e));
 };
-// startDb();
+startDb();
 
 // Base Route
 app.get("/", (req, res) => {
@@ -36,4 +36,4 @@ app.get("/", (req, res) => {
 
 
 // start server
-app.listen(port, () => console.log(`Tweeter server currently running on http://localhost:${post}`))
+app.listen(port, () => console.log(`Tweeter server currently running on http://localhost:${port}`))
