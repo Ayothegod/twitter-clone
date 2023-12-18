@@ -15,7 +15,7 @@ export default function Post({ id, user_id, timestamp, content }) {
   const userData = usersData.filter((data) => data.id === user_id);
   console.log(timestamp);
   return (
-    <div className="border-b flex gap-4 pb-2 w-full">
+    <div className="border-b p-4 flex gap-4 w-full hover:bg-gray-100">
       <img
         src={testProfile}
         alt="test-image"
@@ -42,21 +42,21 @@ export default function Post({ id, user_id, timestamp, content }) {
           <p className="text-slate-700">{content}</p>
         </Link>
         <div className="mt-4 flex items-center justify-between ">
-          <Link to="" className="text-slate-500 flex items-center gap-1">
+          <Link to="" className="text-slate-500 flex items-center gap-1 cursor-pointer">
             <MessageCircle className="h-5 w-5 " />
             {<p>0</p>}
           </Link>
-          <div className="text-slate-500 flex items-center gap-1">
+          <div className="text-slate-500 flex items-center gap-1 cursor-pointer">
             <Repeat2 className="h-5 w-5 " />
             {<p>0</p>}
           </div>
-          <div className="text-slate-500 flex items-center gap-1">
+          <div className="text-slate-500 flex items-center gap-1 cursor-pointer">
             <Heart className="h-5 w-5 " />
             {<p>0</p>}
           </div>
-          <div className="text-slate-500 flex items-center gap-2">
-            <Bookmark className="h-5 w-5 " />
-            <Share className="h-5 w-5 " />
+          <div className="text-slate-500 flex items-center gap-2 ">
+            <Bookmark className="h-5 w-5 cursor-pointer" />
+            <Share className="h-5 w-5 cursor-pointer" />
           </div>
         </div>
       </div>

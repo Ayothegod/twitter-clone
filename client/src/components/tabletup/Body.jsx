@@ -20,7 +20,7 @@ export default function Body() {
       <CreatePost />
 
       {/* render posts, all post from the database using timestamp */}
-      <div className="p-4 flex flex-col gap-4">
+      <div className="flex flex-col">
         {posts && posts.map((post) => <Post key={post.id} {...post} />)}
       </div>
     </div>
