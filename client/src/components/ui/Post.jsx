@@ -27,11 +27,11 @@ export default function Post({ id, user_id, timestamp, content }) {
             {userData.map((data) => (
               <div key={data.id} className="contents">
                 <p className="font-bold text- ">{data.name}</p>
-                <p className="text-slate-400 font-semibold">@{data.username}</p>
+                <p className="text-gray-400 font-semibold">@{data.username}</p>
               </div>
             ))}
-            <span className="text-sm text-slate-400 font-semibold">•</span>
-            <div className="text-sm text-slate-400 font-semibold">
+            <span className="text-sm text-gray-400 font-semibold">•</span>
+            <div className="text-sm text-gray-400 font-semibold">
               {/* <p>{timestamp.toString()}</p> */}
               1hour
             </div>
@@ -39,7 +39,7 @@ export default function Post({ id, user_id, timestamp, content }) {
           </div>
 
           {/* Content of the tweet! */}
-          <p className="text-slate-700">{content}</p>
+          <p className="text-gray-700">{content}</p>
         </Link>
         <div className="mt-4 flex items-center justify-between ">
           <Link to="" className="text-slate-500 flex items-center gap-1 cursor-pointer">

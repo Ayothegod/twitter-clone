@@ -5,15 +5,18 @@
 @layer base {
     .body-xl {
         display: grid;
-        grid-template-columns: 100px auto auto;
+        grid-template-columns: 100px auto minmax(auto, 360px);
     }
     .body-2xl {
         display: grid;
-        grid-template-columns: 240px auto auto;
+        grid-template-columns: 240px auto minmax(auto, 420px);
     }
 }
 @layer components {
     .btn {
-        @apply bg-slate-200 font-semibold w-full py-1 px-2 rounded-full placeholder:text-slate-600 placeholder:text-sm;
+        @apply bg-gray-200 font-semibold w-full py-1 px-2 rounded-full placeholder:text-slate-600 placeholder:text-sm;
+    }
+    .solid-btn {
+        @apply bg-black font-bold py-2 px-4 rounded-full
     }
 }
