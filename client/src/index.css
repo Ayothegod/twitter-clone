@@ -17,6 +17,6 @@
         @apply bg-gray-200 font-semibold w-full py-1 px-2 rounded-full placeholder:text-slate-600 placeholder:text-sm;
     }
     .solid-btn {
-        @apply bg-black font-bold py-2 px-4 rounded-full
+        @apply bg-black font-bold py-2 px-4 rounded-full text-white hover:bg-gray-700
     }
 }

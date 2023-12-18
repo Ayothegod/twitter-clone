@@ -11,11 +11,11 @@ import {
   Share,
 } from "lucide-react";
 
-export default function Post({ id, user_id, timestamp, content }) {
+export default function Post({ id, user_id, timestamp, content, isRecommend }) {
   const userData = usersData.filter((data) => data.id === user_id);
   console.log(timestamp);
   return (
-    <div className="border-b p-4 flex gap-4 w-full hover:bg-gray-100">
+    <div className={`border-b p-4 flex gap-4 w-full hover:bg-gray-100 ${isRecommend && "hover:bg-gray-200 border-none"}`}>
       <img
         src={testProfile}
         alt="test-image"
