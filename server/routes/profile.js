@@ -4,7 +4,7 @@ const { getUserProfile, updateUserProfile, deleteUserProfile } = require("../con
 const router = express.Router();
 
 router.get("/profile/:username", isAuth, getUserProfile)
-router.patch("/profile/update", isAuth, updateUserProfile)
+router.patch("/profile/update/:username", isAuth, updateUserProfile)
 router.delete("/profile/delete", isAuth, deleteUserProfile)
 
 module.exports = router;
