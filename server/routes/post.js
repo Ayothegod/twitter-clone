@@ -7,7 +7,7 @@ const { postValidator } = require("../util/userValidator")
 router.get("/posts/:postId", isAuth, getSinglePost)
 router.get("/posts/all", isAuth, getAllPosts)
 router.get("/posts/user", isAuth, getAllPostsFromUser)
-router.post("/posts/:postId", postValidator, isAuth, createPost)
+router.post("/posts/post", postValidator, isAuth, createPost)
 router.delete("/posts/:postId", isAuth, deletePost)
 
 module.exports = router

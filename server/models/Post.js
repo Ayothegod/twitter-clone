@@ -13,8 +13,6 @@ const postSchema = new schema(
     authorUsername: {
       type: String,
       required: [true, "author username is required"],
-      unique: true,
-      index: true,
     },
     authorFullname: {
       type: String,
