@@ -25,7 +25,13 @@ const registerUser = async (req, res) => {
       username: req.body.username,
       fullname: req.body.fullname,
       password: hashedPassword,
-      website: req.body.password, //remove later
+      bio:"",
+      coverPhoto:"",
+      profilePhoto:"",
+      profession:"",
+      website:"",
+      location:"",
+      email:""
     });
 
     req.session.isAuth = true;
