@@ -69,6 +69,15 @@ app.get("/user",isAuth, (req, res) => {
   }
 });
 
+app.get("/logout",isAuth, (req, res) => {
+  try {
+    req.session.destroy()
+    res.status(200).json("Logged out");
+  } catch (error) {
+    res.json("you cant log out");
+  }
+});
+
 // Routes
 app.use("/", userRoute)
 app.use("/", postRoute)
