@@ -38,4 +38,20 @@ const registerValidator = [
   }),
 ];
 
-module.exports = { loginValidator, registerValidator };
+const postValidator = [
+  body("authorId", "post must have an author").not().isEmpty(),
+  body("authorPhoto", "your post author must have a picture").not().isEmpty(),
+  body("authorUsername", "your post author must have a username")
+    .not()
+    .isEmpty(),
+  body("authorFullname", "your post author must have a fullname")
+    .not()
+    .isEmpty(),
+  body("postData", "your post cannot be empty").not().isEmpty(),
+  body(
+    "postData",
+    "your post content must not be more than 150 characters"
+  ).isLength({ max: 150 }),
+];
+
+module.exports = { loginValidator, registerValidator, postValidator };
