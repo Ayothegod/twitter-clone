@@ -6,6 +6,7 @@ const createPost = async (req, res) => {
   try {
     const errors = validationResult(req);
     if (errors.isEmpty() === false) {
+        // can't find how to destructure this error => to the frontend
       return res.status(422).json({ errors: errors.array() });
     }
 
