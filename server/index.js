@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
-const multer = require("multer");
+const helmet = require("helmet");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const User = require("./models/User");
@@ -11,9 +11,11 @@ const app = express();
 const port = process.env.PORT || 4001;
 
 const userRoute = require("./routes/user")
+const postRoute = require("./routes/post")
 
 // middlewares
 app.use(morgan("dev"));
+app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -39,6 +41,7 @@ app.get("/", (req, res) => {
 
 // Routes
 app.use("/", userRoute)
+app.use("/", postRoute)
 
 // start server
 app.listen(port, () =>
