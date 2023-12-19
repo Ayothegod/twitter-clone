@@ -72,11 +72,15 @@ const loginUser = async (req, res) => {
 
 const logout = (req, res) => {
   try {
+    if (!req.session.isAuth) {
+      res.status(400);
+      throw new Error("You are not logged in");
+    }
     req.session.destroy();
     res.status(200).json("User session has been logged out.");
   } catch (error) {
-    console.log(error);
-    res.json(error);
+    res.status(500);
+    throw new Error("Something went wrong");
   }
 };
 

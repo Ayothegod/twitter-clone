@@ -15,6 +15,7 @@ const port = process.env.PORT || 4001;
 const userRoute = require("./routes/user")
 const postRoute = require("./routes/post");
 const { isAuth } = require("./middleware/session");
+const { notFound, errorHandler } = require("./middleware/error");
 
 // middlewares
 app.use(morgan("dev"));
@@ -55,6 +56,9 @@ app.get("/", (req, res) => {
 // Routes
 app.use("/", userRoute)
 app.use("/", postRoute)
+
+app.use(notFound)
+app.use(errorHandler)
 
 // start server
 app.listen(port, () =>
