@@ -10,9 +10,10 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 4001;
 
+const userRoute = require("./routes/user")
+
 // middlewares
 app.use(morgan("dev"));
-// app.use(multer());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -28,16 +29,16 @@ const startDb = () => {
 startDb();
 
 // Base Route
-app.get("/", async (req, res) => {
+app.get("/", (req, res) => {
   try {
-    const user = await User.create({});
-    res.status(200).json(user);
+    res.status(200).json("Default route");
   } catch (error) {
     res.json(error);
   }
 });
 
 // Routes
+app.use("/", userRoute)
 
 // start server
 app.listen(port, () =>
