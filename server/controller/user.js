@@ -1,5 +1,4 @@
 const { validationResult } = require("express-validator");
-const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const { hashPassword, matchPassword } = require("../util/hashPassword");
 const User = require("../models/User");
@@ -32,8 +31,8 @@ const registerUser = async (req, res) => {
     req.session.isAuth = true;
     res.status(201).json(user);
   } catch (error) {
-    console.log(error);
-    res.status(500).json(error);
+    res.status(500);
+    throw new Error("Something went wrong");
   }
 };
 
@@ -65,8 +64,8 @@ const loginUser = async (req, res) => {
     req.session.isAuth = true;
     res.status(201).json(checkForUser);
   } catch (error) {
-    console.log(error);
-    res.status(500).json(error);
+    res.status(500);
+    throw new Error("Something went wrong");
   }
 };
 
