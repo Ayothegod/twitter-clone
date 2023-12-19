@@ -1,10 +1,10 @@
 const { validationResult } = require("express-validator");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const { hashPassword } = require("../util/hashPassword");
+const { hashPassword, matchPassword } = require("../util/hashPassword");
 const User = require("../models/User");
 
-const createUser = async (req, res) => {
+const registerUser = async (req, res) => {
   try {
     const errors = validationResult(req);
     if (errors.isEmpty() === false) {
@@ -26,6 +26,7 @@ const createUser = async (req, res) => {
       username: req.body.username,
       fullname: req.body.fullname,
       password: hashedPassword,
+      website: req.body.password //remove later
     });
 
     res.status(201).json(user);
@@ -35,6 +36,33 @@ const createUser = async (req, res) => {
   }
 };
 
-module.exports = { createUser };
+const loginUser = async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (errors.isEmpty() === false) {
+      return res.status(422).json({ errors: errors.array() });
+    }
 
-// validate all data, encrypt password, check if user exist, save
+    // check if you exist or not
+    const checkForUser = await User.findOne({
+        username: req.body.username,
+    });
+    if (!checkForUser) {
+        return res.status(301).json("user with this username does not exist");
+    }
+
+    // decrypt password
+    const matchedPassword = await matchPassword(req.body.password, checkForUser.password);
+
+    if(!matchedPassword) {
+        return res.status(404).json("username or password is not correct")
+    }
+
+    res.status(201).json(checkForUser);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+};
+
+module.exports = { registerUser, loginUser};
