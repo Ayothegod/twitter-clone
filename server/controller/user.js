@@ -26,9 +26,10 @@ const registerUser = async (req, res) => {
       username: req.body.username,
       fullname: req.body.fullname,
       password: hashedPassword,
-      website: req.body.password //remove later
+      website: req.body.password, //remove later
     });
 
+    req.session.isAuth = true;
     res.status(201).json(user);
   } catch (error) {
     console.log(error);
@@ -45,19 +46,23 @@ const loginUser = async (req, res) => {
 
     // check if you exist or not
     const checkForUser = await User.findOne({
-        username: req.body.username,
+      username: req.body.username,
     });
     if (!checkForUser) {
-        return res.status(301).json("user with this username does not exist");
+      return res.status(301).json("user with this username does not exist");
     }
 
     // decrypt password
-    const matchedPassword = await matchPassword(req.body.password, checkForUser.password);
+    const matchedPassword = await matchPassword(
+      req.body.password,
+      checkForUser.password
+    );
 
-    if(!matchedPassword) {
-        return res.status(404).json("username or password is not correct")
+    if (!matchedPassword) {
+      return res.status(404).json("username or password is not correct");
     }
 
+    req.session.isAuth = true;
     res.status(201).json(checkForUser);
   } catch (error) {
     console.log(error);
@@ -65,4 +70,14 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { registerUser, loginUser};
+const logout = (req, res) => {
+  try {
+    req.session.destroy();
+    res.status(200).json("User session has been logged out.");
+  } catch (error) {
+    console.log(error);
+    res.json(error);
+  }
+};
+
+module.exports = { registerUser, loginUser, logout };
