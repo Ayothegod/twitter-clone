@@ -53,7 +53,7 @@ const updateUserProfile = async (req, res) => {
         location: req.body.location || userProfile.location,
     })
 
-    res.status(200).json(updatedUser)
+    res.status(200).json("User profile has been updated successfully!")
   } catch (error) {
     res.status(500);
     throw new Error("Something went wrong");
@@ -62,6 +62,17 @@ const updateUserProfile = async (req, res) => {
 
 const deleteUserProfile = async (req, res) => {
   try {
+    const { username } = req.params;
+
+    const userProfile = await User.findOne({ username: username });
+    if (!userProfile) {
+        return res.status(401).json("user profile not found")
+    }
+
+    const deletedUser = await User.deleteOne({username: username})
+    
+    req.session.destroy()
+    res.status(201).json("User profile has been deleted successfully.")
   } catch (error) {
     res.status(500);
     throw new Error("Something went wrong");

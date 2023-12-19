@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.get("/profile/:username", isAuth, getUserProfile)
 router.patch("/profile/update/:username", isAuth, updateUserProfile)
-router.delete("/profile/delete", isAuth, deleteUserProfile)
+router.delete("/profile/delete/:username", isAuth, deleteUserProfile)
 
 module.exports = router;
