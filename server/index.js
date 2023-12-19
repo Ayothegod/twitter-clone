@@ -12,7 +12,7 @@ const port = process.env.PORT || 4001;
 
 // middlewares
 app.use(morgan("dev"));
-app.use(multer);
+// app.use(multer());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -30,12 +30,7 @@ startDb();
 // Base Route
 app.get("/", async (req, res) => {
   try {
-    const data = {
-      fullname: "Ayomide",
-      username: "Aiiomide",
-      password: "Aiioeds98",
-    };
-    const user = await User.create({ data });
+    const user = await User.create({});
     res.status(200).json(user);
   } catch (error) {
     res.json(error);
