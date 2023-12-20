@@ -123,11 +123,36 @@ const getAllPosts = async (req, res) => {
   }
 };
 
-const likePost = (req, res) => {
+const likePost = async (req, res) => {
   try {
     // we need the likeUserId
-    res.status(201).json("Alright");
+    const { postId } = req.params;
+    const { likeUserId } = req.body;
+    if (!postId || !likeUserId) {
+      return res.status(401).json("provide post id and userId to like post!");
+    }
+
+    // find the post
+    const post = await Post.findOne({ _id: postId });
+    if (!post) {
+      return res.status(401).json("postId is not correct!");
+    }
+
     // check if the person has liked the post before, if true unlike, else like
+    if (post.likeCount.includes(likeUserId)) {
+      post.likeCount.pull(likeUserId)
+      await post.save();
+      return res.status(401).json("post unliked successfully");
+    }
+
+    post.likeCount.push(likeUserId);
+    await post.save();
+
+    res.status(201).json({
+      success: true,
+      msg: "post liked successfully",
+      updatedPost: post,
+    });
   } catch (error) {
     res.status(500);
     throw new Error("Something went wrong");
