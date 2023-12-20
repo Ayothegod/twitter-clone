@@ -1,5 +1,6 @@
 const Post = require("../models/Post");
 const User = require("../models/User");
+const Comment = require("../models/Comment");
 const { validationResult } = require("express-validator");
 
 const createPost = async (req, res) => {
@@ -66,6 +67,21 @@ const deletePost = async (req, res) => {
       return res.status(401).json("provide post id to retrieve post!");
     }
 
+    // delete all comment associated with it
+    const deletePostComments = await Comment.deleteMany({
+      postId: postId,
+    });
+
+    const removeDeletedPostIdFromProfile = await User.find();
+
+    // remove the post id from the profile postsId
+    const indProfile = removeDeletedPostIdFromProfile.map(async (user) => {
+      if (user.postsId.includes(postId)) {
+        user.postsId.pull(postId);
+        await user.save();
+      }
+    })
+
     const deletedPost = await Post.deleteOne({ _id: postId });
     if (!deletedPost) {
       return res.status(401).json("this post has already been deleted!");
@@ -76,6 +92,7 @@ const deletePost = async (req, res) => {
       msg: "post deleted successfully",
     });
   } catch (error) {
+    console.log(error);
     res.status(500);
     throw new Error("Something went wrong");
   }
@@ -140,7 +157,7 @@ const likePost = async (req, res) => {
 
     // check if the person has liked the post before, if true unlike, else like
     if (post.likeCount.includes(likeUserId)) {
-      post.likeCount.pull(likeUserId)
+      post.likeCount.pull(likeUserId);
       await post.save();
       return res.status(401).json("post unliked successfully");
     }
@@ -179,3 +196,7 @@ module.exports = {
   likePost,
   retweetPost,
 };
+
+// if (!removeDeletedPostIdFromProfile.postsId.includes(postId)) {
+//     return res.status(401).json("post unliked successfully");
+//   }
