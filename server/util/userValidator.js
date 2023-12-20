@@ -47,4 +47,13 @@ const postValidator = [
   ).isLength({ max: 150 }),
 ];
 
-module.exports = { loginValidator, registerValidator, postValidator };
+const commentValidator = [
+  body("authorId", "post must have an author").not().isEmpty(),
+  body("commentData", "your comment cannot be empty").not().isEmpty(),
+  body(
+    "commentData",
+    "your comment content must not be more than 150 characters"
+  ).isLength({ max: 150 }),
+];
+
+module.exports = { loginValidator, registerValidator, postValidator, commentValidator };
