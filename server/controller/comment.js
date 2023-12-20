@@ -159,7 +159,6 @@ const likeComment = async (req, res) => {
 
 const retweetComment = (req, res) => {
   try {
-    // I dont want to even think about this endpoint now at all
     // retweetUserId
     res.status(201).json("Alright");
   } catch (error) {
