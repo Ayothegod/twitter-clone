@@ -43,7 +43,7 @@ const getSinglePost = async (req, res) => {
       return res.status(401).json("provide post id to retrieve post!");
     }
 
-    const post = await Post.findById({ _id:postId });
+    const post = await Post.findById({ _id: postId });
     if (!post) {
       return res.status(401).json("post with this id does not exist!");
     }
@@ -66,7 +66,7 @@ const deletePost = async (req, res) => {
       return res.status(401).json("provide post id to retrieve post!");
     }
 
-    const deletedPost = await Post.deleteOne({ _id:postId })
+    const deletedPost = await Post.deleteOne({ _id: postId });
     if (!deletedPost) {
       return res.status(401).json("this post has already been deleted!");
     }
@@ -74,16 +74,33 @@ const deletePost = async (req, res) => {
     res.status(201).json({
       success: true,
       msg: "post deleted successfully",
-    })
+    });
   } catch (error) {
     res.status(500);
     throw new Error("Something went wrong");
   }
 };
 
-const getAllPostsFromUser = (req, res) => {
+const getAllPostsFromUser = async (req, res) => {
   try {
-    res.status(201).json("Alright");
+    const { authorId } = req.params;
+    if (!authorId) {
+      return res.status(401).json("provide post id to retrieve post!");
+    }
+
+    const userOfId = await User.findById({ _id: authorId });
+    if (!userOfId) {
+      return res.status(401).json("user with this id does not exist");
+    }
+
+    const allUserPosts = await Post.find({ authorId: userOfId._id });
+
+    res.status(201).json({
+      success: true,
+      msg: "posts retrieved successfully",
+      postsAmount: allUserPosts.length,
+      posts: allUserPosts,
+    });
   } catch (error) {
     res.status(500);
     throw new Error("Something went wrong");
