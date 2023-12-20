@@ -78,19 +78,19 @@ const getSingleComment = async (req, res) => {
 
 const deleteComment = async (req, res) => {
   try {
-    const { postId } = req.params;
-    if (!postId) {
-      return res.status(401).json("provide post id to retrieve post!");
+    const { postId, commentId } = req.params;
+    if (!postId || !commentId) {
+      return res.status(401).json("provide postId and commentId to retrieve comment!");
     }
 
-    const deletedPost = await Post.deleteOne({ _id: postId });
+    const deletedPost = await Comment.deleteOne({ _id: commentId });
     if (!deletedPost) {
-      return res.status(401).json("this post has already been deleted!");
+      return res.status(401).json("this comment has already been deleted!");
     }
 
     res.status(201).json({
       success: true,
-      msg: "post deleted successfully",
+      msg: "comment deleted successfully",
     });
   } catch (error) {
     res.status(500);
