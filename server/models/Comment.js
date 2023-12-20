@@ -7,6 +7,19 @@ const commentSchema = new schema(
       type: String,
       required: [true, "authorId is required"],
     },
+    authorPhoto: {
+      type: String,
+    },
+    authorUsername: {
+      type: String,
+      required: [true, "author username is required"],
+      unique: true,
+      index: true,
+    },
+    authorFullname: {
+      type: String,
+      required: true,
+    },
     commentData: {
         type: String,
         required: true,

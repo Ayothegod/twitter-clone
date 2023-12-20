@@ -9,23 +9,23 @@ const createPost = async (req, res) => {
         // can't find how to destructure this error => to the frontend
       return res.status(422).json({ errors: errors.array() });
     }
-
-    // can also change the logic, to receive only id, then find the user, then use the found users data to post
+    
+    // post user data using id
+    const profileData = await User.findOne({
+      _id: req.body.authorId,
+    });
 
     const post = await Post.create({
-      authorId: req.body.authorId,
-      authorPhoto: req.body.authorPhoto,
-      authorUsername: req.body.authorUsername,
-      authorFullname: req.body.authorFullname,
+      authorId: profileData._id,
+      authorPhoto: profileData.profilePhoto,
+      authorUsername: profileData.username,
+      authorFullname: profileData.fullname,
       postData: req.body.postData,
     });
 
     const postId = await post._id;
 
     // add postId to profileData postId's array
-    const profileData = await User.findOne({
-      username: req.body.authorUsername,
-    });
     profileData.postsId.push(postId);
     await profileData.save();
 
@@ -103,3 +103,21 @@ module.exports = {
   likePost, 
   retweetPost
 };
+
+// {
+//   "msg": "post created successfully",
+//   "post": {
+//     "authorId": "6582b80af3074ca82252162e",
+//     "authorPhoto": "hhtp://gfenphotoUrl",
+//     "authorUsername": "Aiiomide",
+//     "authorFullname": "Ayomide Adebisi",
+//     "postData": "This is my second post with this account ✌",
+//     "commentId": [],
+//     "likeCount": [],
+//     "retweetCount": [],
+//     "_id": "6582ba3788e6ca359875035e",
+//     "createdAt": "2023-12-20T09:56:07.899Z",
+//     "updatedAt": "2023-12-20T09:56:07.899Z",
+//     "__v": 0
+//   }
+// }
