@@ -107,9 +107,16 @@ const getAllPostsFromUser = async (req, res) => {
   }
 };
 
-const getAllPosts = (req, res) => {
+const getAllPosts = async (req, res) => {
   try {
-    res.status(201).json("Alright");
+    const allPosts = await Post.find();
+
+    res.status(201).json({
+      success: true,
+      msg: "all posts retrieved successfully",
+      postsAmount: allPosts.length,
+      posts: allPosts,
+    });
   } catch (error) {
     res.status(500);
     throw new Error("Something went wrong");
