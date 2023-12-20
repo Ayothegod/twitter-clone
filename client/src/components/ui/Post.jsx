@@ -6,7 +6,7 @@ import {
   Bookmark,
   Heart,
   MessageCircle,
-  MoreHorizontal,
+  MoreVertical,
   Repeat2,
   Share,
 } from "lucide-react";
@@ -15,13 +15,18 @@ export default function Post({ id, user_id, timestamp, content, isRecommend }) {
   const userData = usersData.filter((data) => data.id === user_id);
   console.log(timestamp);
   return (
-    <div className={`border-b p-4 flex gap-4 w-full hover:bg-gray-100 ${isRecommend && "hover:bg-gray-200 border-none"}`}>
+    <div
+      className={`border-b p-4 flex gap-4 w-full hover:bg-gray-100 ${
+        isRecommend && "hover:bg-gray-200 border-none"
+      }`}
+    >
       <img
         src={testProfile}
         alt="test-image"
         className="h-10 w-10 rounded-full cursor-pointer"
       />
-      <div className="w-full">
+
+      <div className="w-full relative">
         <Link to={`/tweets/${id}`}>
           <div className="flex items-center gap-2 w-full ">
             {userData.map((data) => (
@@ -35,14 +40,23 @@ export default function Post({ id, user_id, timestamp, content, isRecommend }) {
               {/* <p>{timestamp.toString()}</p> */}
               1hour
             </div>
-            <MoreHorizontal className=" ml-auto" />
+
+            {/* move this tab outside or make it absolute */}
           </div>
 
           {/* Content of the tweet! */}
           <p className="text-gray-700">{content}</p>
         </Link>
+
+        <div className=" absolute right-0 top-0 hover:bg-gray-200 hover:rounded-full cursor-pointer">
+          <MoreVertical className=" h-5 w-5" />
+        </div>
+
         <div className="mt-4 flex items-center justify-between ">
-          <Link to="" className="text-slate-500 flex items-center gap-1 cursor-pointer">
+          <Link
+            to=""
+            className="text-slate-500 flex items-center gap-1 cursor-pointer"
+          >
             <MessageCircle className="h-5 w-5 " />
             {<p>0</p>}
           </Link>

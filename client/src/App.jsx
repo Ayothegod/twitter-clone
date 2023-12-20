@@ -4,6 +4,7 @@ import Auth from "./pages/Auth";
 import Message from "./pages/Message";
 import Notification from "./pages/Notification";
 import Search from "./pages/Search";
+import Post from "./pages/Post";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/search" element={<Search />}></Route>
         <Route path="/notification" element={<Notification />}></Route>
         <Route path="/message" element={<Message />}></Route>
+        <Route path="/tweets/:postId" element={<Post/>}></Route>
       </Routes>
     </>
   );
