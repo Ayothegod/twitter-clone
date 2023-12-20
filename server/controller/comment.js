@@ -36,13 +36,11 @@ const createComment = async (req, res) => {
     postData.commentId.push(commentId);
     await postData.save();
 
-    res
-      .status(201)
-      .json({
-        msg: "comment created successfully",
-        comment: comment,
-        postOfComment: postData,
-      });
+    res.status(201).json({
+      msg: "comment created successfully",
+      comment: comment,
+      postOfComment: postData,
+    });
   } catch (error) {
     res.status(500);
     throw new Error("Something went wrong");
@@ -51,20 +49,26 @@ const createComment = async (req, res) => {
 
 const getSingleComment = async (req, res) => {
   try {
-    const { postId } = req.params;
-    if (!postId) {
-      return res.status(401).json("provide post id to retrieve post!");
+    // postId and commentId
+    // {
+    //   "postId":"6582c2a3c5d33a27c1f8ae46",
+    //   "commentId":"658307a5702495ee43a9b005"
+    // }
+
+    const { postId, commentId } = req.params;
+    if (!postId || !commentId) {
+      return res.status(401).json("provide postId and commentId to retrieve comment!");
     }
 
-    const post = await Post.findById({ _id: postId });
-    if (!post) {
-      return res.status(401).json("post with this id does not exist!");
+    const comment = await Comment.findById({ _id: commentId });
+    if (!comment) {
+      return res.status(401).json("comment with this id does not exist!");
     }
 
     res.status(201).json({
       success: true,
-      msg: "post retrieved successfully",
-      post: post,
+      msg: "comment retrieved successfully",
+      comment: comment,
     });
   } catch (error) {
     res.status(500);
