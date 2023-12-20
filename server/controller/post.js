@@ -6,7 +6,7 @@ const createPost = async (req, res) => {
   try {
     const errors = validationResult(req);
     if (errors.isEmpty() === false) {
-        // can't find how to destructure this error => to the frontend
+      // can't find how to destructure this error => to the frontend
       return res.status(422).json({ errors: errors.array() });
     }
 
@@ -29,16 +29,30 @@ const createPost = async (req, res) => {
     profileData.postsId.push(postId);
     await profileData.save();
 
-    res.status(201).json({ msg: "post created successfully", post: post })
+    res.status(201).json({ msg: "post created successfully", post: post });
   } catch (error) {
     res.status(500);
     throw new Error("Something went wrong");
   }
 };
 
-const getSinglePost = (req, res) => {
+const getSinglePost = async (req, res) => {
   try {
-    res.status(201).json("Alright");
+    const { postId } = req.params;
+    if (!postId) {
+      return res.status(401).json("provide post id to retrieve post!");
+    }
+
+    const post = await Post.findById({ _id:postId });
+    if (!post) {
+      return res.status(401).json("post with this id does not exist!");
+    }
+
+    res.status(201).json({
+      success: true,
+      msg: "post retrieved successfully",
+      post: post,
+    });
   } catch (error) {
     res.status(500);
     throw new Error("Something went wrong");
@@ -100,6 +114,6 @@ module.exports = {
   deletePost,
   getAllPostsFromUser,
   getAllPosts,
-  likePost, 
-  retweetPost
+  likePost,
+  retweetPost,
 };
