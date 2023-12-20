@@ -13,7 +13,7 @@ const {
 
 router.get("/posts/post/:postId/comments/:commentId", isAuth, getSingleComment);
 
-router.get("/posts/post/:postId/comments/all", isAuth, getAllComments);
+router.get("/posts/post/:postId/comments", isAuth, getAllComments);
 
 router.post("/posts/post/comments/comment", commentValidator, isAuth, createComment);
 

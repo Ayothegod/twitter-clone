@@ -39,7 +39,6 @@ const createComment = async (req, res) => {
     res.status(201).json({
       msg: "comment created successfully",
       comment: comment,
-      postOfComment: postData,
     });
   } catch (error) {
     res.status(500);
@@ -76,6 +75,7 @@ const getSingleComment = async (req, res) => {
   }
 };
 
+// delete comment
 const deleteComment = async (req, res) => {
   try {
     const { postId, commentId } = req.params;
@@ -98,15 +98,22 @@ const deleteComment = async (req, res) => {
   }
 };
 
+// get all comments
 const getAllComments = async (req, res) => {
   try {
-    const allPosts = await Post.find();
+    // postId 
+    const {postId} = req.params
+
+    const allPostComments = await Comment.find({
+      postId: postId
+    });
+    // const allComments = await Comment.find();
 
     res.status(201).json({
       success: true,
       msg: "all posts retrieved successfully",
-      postsAmount: allPosts.length,
-      posts: allPosts,
+      commentAmount: allPostComments.length,
+      comments: allPostComments,
     });
   } catch (error) {
     res.status(500);
