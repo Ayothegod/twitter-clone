@@ -59,9 +59,22 @@ const getSinglePost = async (req, res) => {
   }
 };
 
-const deletePost = (req, res) => {
+const deletePost = async (req, res) => {
   try {
-    res.status(201).json("Alright");
+    const { postId } = req.params;
+    if (!postId) {
+      return res.status(401).json("provide post id to retrieve post!");
+    }
+
+    const deletedPost = await Post.deleteOne({ _id:postId })
+    if (!deletedPost) {
+      return res.status(401).json("this post has already been deleted!");
+    }
+
+    res.status(201).json({
+      success: true,
+      msg: "post deleted successfully",
+    })
   } catch (error) {
     res.status(500);
     throw new Error("Something went wrong");
