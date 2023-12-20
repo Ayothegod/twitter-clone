@@ -56,7 +56,9 @@ const getSingleComment = async (req, res) => {
 
     const { postId, commentId } = req.params;
     if (!postId || !commentId) {
-      return res.status(401).json("provide postId and commentId to retrieve comment!");
+      return res
+        .status(401)
+        .json("provide postId and commentId to retrieve comment!");
     }
 
     const comment = await Comment.findById({ _id: commentId });
@@ -80,7 +82,19 @@ const deleteComment = async (req, res) => {
   try {
     const { postId, commentId } = req.params;
     if (!postId || !commentId) {
-      return res.status(401).json("provide postId and commentId to retrieve comment!");
+      return res
+        .status(401)
+        .json("provide postId and commentId to retrieve comment!");
+    }
+
+    // remove the comment id saved to post
+    const commentPost = await Post.findOne({
+      _id: postId,
+    });
+
+    if (commentPost.commentId.includes(commentId)) {
+      commentPost.commentId.pull(commentId);
+      await commentPost.save();
     }
 
     const deletedPost = await Comment.deleteOne({ _id: commentId });
@@ -101,11 +115,11 @@ const deleteComment = async (req, res) => {
 // get all comments
 const getAllComments = async (req, res) => {
   try {
-    // postId 
-    const {postId} = req.params
+    // postId
+    const { postId } = req.params;
 
     const allPostComments = await Comment.find({
-      postId: postId
+      postId: postId,
     });
     // const allComments = await Comment.find();
 
@@ -127,7 +141,9 @@ const likeComment = async (req, res) => {
     const { postId, commentId } = req.params;
     const { likeUserId } = req.body;
     if (!postId || !commentId || !likeUserId) {
-      return res.status(401).json("provide post id, userId and commentId to like post!");
+      return res
+        .status(401)
+        .json("provide post id, userId and commentId to like post!");
     }
 
     // // find the comment
