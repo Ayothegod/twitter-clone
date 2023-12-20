@@ -10,6 +10,8 @@ const createPost = async (req, res) => {
       return res.status(422).json({ errors: errors.array() });
     }
 
+    // can also change the logic, to receive only id, then find the user, then use the found users data to post
+
     const post = await Post.create({
       authorId: req.body.authorId,
       authorPhoto: req.body.authorPhoto,
@@ -70,10 +72,34 @@ const getAllPosts = (req, res) => {
   }
 };
 
+const likePost = (req, res) => {
+  try {
+    // we need the likeUserId
+    res.status(201).json("Alright");
+    // check if the person has liked the post before, if true unlike, else like
+  } catch (error) {
+    res.status(500);
+    throw new Error("Something went wrong");
+  }
+};
+
+const retweetPost = (req, res) => {
+  try {
+    // I dont want to even think about this endpoint now at all
+    // retweetUserId
+    res.status(201).json("Alright");
+  } catch (error) {
+    res.status(500);
+    throw new Error("Something went wrong");
+  }
+};
+
 module.exports = {
   createPost,
   getSinglePost,
   deletePost,
   getAllPostsFromUser,
   getAllPosts,
+  likePost, 
+  retweetPost
 };
