@@ -9,7 +9,7 @@ const createPost = async (req, res) => {
         // can't find how to destructure this error => to the frontend
       return res.status(422).json({ errors: errors.array() });
     }
-    
+
     // post user data using id
     const profileData = await User.findOne({
       _id: req.body.authorId,
@@ -103,21 +103,3 @@ module.exports = {
   likePost, 
   retweetPost
 };
-
-// {
-//   "msg": "post created successfully",
-//   "post": {
-//     "authorId": "6582b80af3074ca82252162e",
-//     "authorPhoto": "hhtp://gfenphotoUrl",
-//     "authorUsername": "Aiiomide",
-//     "authorFullname": "Ayomide Adebisi",
-//     "postData": "This is my second post with this account ✌",
-//     "commentId": [],
-//     "likeCount": [],
-//     "retweetCount": [],
-//     "_id": "6582ba3788e6ca359875035e",
-//     "createdAt": "2023-12-20T09:56:07.899Z",
-//     "updatedAt": "2023-12-20T09:56:07.899Z",
-//     "__v": 0
-//   }
-// }
