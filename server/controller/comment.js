@@ -124,32 +124,32 @@ const getAllComments = async (req, res) => {
 const likeComment = async (req, res) => {
   try {
     // we need the likeUserId
-    const { postId } = req.params;
+    const { postId, commentId } = req.params;
     const { likeUserId } = req.body;
-    if (!postId || !likeUserId) {
-      return res.status(401).json("provide post id and userId to like post!");
+    if (!postId || !commentId || !likeUserId) {
+      return res.status(401).json("provide post id, userId and commentId to like post!");
     }
 
-    // find the post
-    const post = await Post.findOne({ _id: postId });
-    if (!post) {
+    // // find the comment
+    const comment = await Comment.findOne({ _id: commentId });
+    if (!comment) {
       return res.status(401).json("postId is not correct!");
     }
 
-    // check if the person has liked the post before, if true unlike, else like
-    if (post.likeCount.includes(likeUserId)) {
-      post.likeCount.pull(likeUserId);
-      await post.save();
-      return res.status(401).json("post unliked successfully");
+    // check if the person has liked the comment before, if true unlike, else like
+    if (comment.likeCount.includes(likeUserId)) {
+      comment.likeCount.pull(likeUserId);
+      await comment.save();
+      return res.status(401).json("comment unliked successfully");
     }
 
-    post.likeCount.push(likeUserId);
-    await post.save();
+    comment.likeCount.push(likeUserId);
+    await comment.save();
 
     res.status(201).json({
       success: true,
-      msg: "post liked successfully",
-      updatedPost: post,
+      msg: "comment liked successfully",
+      updatedComment: comment,
     });
   } catch (error) {
     res.status(500);
