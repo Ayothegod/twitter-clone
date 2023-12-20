@@ -5,31 +5,44 @@ const { validationResult } = require("express-validator");
 
 const createComment = async (req, res) => {
   try {
+    // authorId, postId, commentData
+
     const errors = validationResult(req);
     if (errors.isEmpty() === false) {
       return res.status(422).json({ errors: errors.array() });
     }
 
-    // post data using id
-    const postData = await User.findOne({
+    // user/profile data using authorId
+    const profileData = await User.findOne({
+      _id: req.body.authorId,
+    });
+
+    const postData = await Post.findOne({
       _id: req.body.postId,
     });
 
-    const post = await Post.create({
-      authorId: postData._id,
-      authorPhoto: postData.profilePhoto,
-      authorUsername: postData.username,
-      authorFullname: postData.fullname,
-      commentData: req.body.postData,
+    const comment = await Comment.create({
+      authorId: profileData._id,
+      authorPhoto: profileData.profilePhoto,
+      authorUsername: profileData.username,
+      authorFullname: profileData.fullname,
+      commentData: req.body.commentData,
+      postId: postData._id,
     });
 
-    const postId = await post._id;
+    const commentId = await comment._id;
 
-    // add postId to profileData postId's array
-    profileData.postsId.push(postId);
-    await profileData.save();
+    // add commentId to postData commentId's array
+    postData.commentId.push(commentId);
+    await postData.save();
 
-    res.status(201).json({ msg: "post created successfully", post: post });
+    res
+      .status(201)
+      .json({
+        msg: "comment created successfully",
+        comment: comment,
+        postOfComment: postData,
+      });
   } catch (error) {
     res.status(500);
     throw new Error("Something went wrong");
@@ -114,7 +127,7 @@ const likeComment = async (req, res) => {
 
     // check if the person has liked the post before, if true unlike, else like
     if (post.likeCount.includes(likeUserId)) {
-      post.likeCount.pull(likeUserId)
+      post.likeCount.pull(likeUserId);
       await post.save();
       return res.status(401).json("post unliked successfully");
     }

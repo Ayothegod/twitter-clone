@@ -15,6 +15,7 @@ const port = process.env.PORT || 4001;
 const userRoute = require("./routes/user")
 const postRoute = require("./routes/post");
 const profileRoute = require("./routes/profile");
+const commentRoute = require("./routes/comment");
 const { isAuth } = require("./middleware/session");
 const { notFound, errorHandler } = require("./middleware/error");
 
@@ -57,6 +58,7 @@ app.get("/", (req, res) => {
 // Routes
 app.use("/api", userRoute)
 app.use("/api", postRoute)
+app.use("/api", commentRoute)
 app.use("/api", profileRoute)
 
 app.use(notFound)

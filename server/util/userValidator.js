@@ -48,7 +48,8 @@ const postValidator = [
 ];
 
 const commentValidator = [
-  body("authorId", "post must have an author").not().isEmpty(),
+  body("authorId", "comment must have an author").not().isEmpty(),
+  body("postId", "comment must have a post").not().isEmpty(),
   body("commentData", "your comment cannot be empty").not().isEmpty(),
   body(
     "commentData",

@@ -12,10 +12,15 @@ const {
 } = require("../controller/comment");
 
 router.get("/posts/post/:postId/comments/:commentId", isAuth, getSingleComment);
+
 router.get("/posts/post/:postId/comments/all", isAuth, getAllComments);
-router.post("/posts/post/comment", commentValidator, isAuth, createComment);
+
+router.post("/posts/post/comments/comment", commentValidator, isAuth, createComment);
+
 router.post("/posts/likes/:postId/comments/likes/:commentId", isAuth, likeComment);
+
 router.post("/posts/post/:retweetUserId/comments/comment/:retweetId", isAuth, retweetComment);
+
 router.delete("/posts/:postId/comments/:commentId", isAuth, deleteComment);
 
 module.exports = router;
