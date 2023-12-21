@@ -8,7 +8,8 @@ const getUserProfile = async (req, res) => {
   try {
     const { username } = req.params;
 
-    const userProfile = await User.findOne({ username: username });
+    // const userProfile = await User.where({ username: username }).populate("postsId")
+    const userProfile = await User.findOne({ username: username }).populate("postsId")
     if (!userProfile) {
       return res.status(401).json("user profile not found");
     }

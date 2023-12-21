@@ -96,6 +96,7 @@ const following = async (req, res) => {
   }
 };
 
+// bookmark post
 const bookmark = async (req, res) => {
   try {
     res.status(200).json({

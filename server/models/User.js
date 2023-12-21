@@ -46,6 +46,7 @@ const userSchema = new schema(
     },
     postsId: {
       type: [String],
+      ref: "Post"
     },
   },
   {
