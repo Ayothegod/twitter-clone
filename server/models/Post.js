@@ -24,6 +24,7 @@ const postSchema = new schema(
     },
     commentId: {
       type: [String],
+      ref: "Comment"
     },
     likeCount: {
       type: [String],

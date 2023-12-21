@@ -44,7 +44,7 @@ const getSinglePost = async (req, res) => {
       return res.status(401).json("provide post id to retrieve post!");
     }
 
-    const post = await Post.findById({ _id: postId });
+    const post = await Post.findById({ _id: postId }).populate("commentId")
     if (!post) {
       return res.status(401).json("post with this id does not exist!");
     }
@@ -55,6 +55,7 @@ const getSinglePost = async (req, res) => {
       post: post,
     });
   } catch (error) {
+    console.log(error);
     res.status(500);
     throw new Error("Something went wrong");
   }
