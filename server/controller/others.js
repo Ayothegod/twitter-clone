@@ -97,8 +97,11 @@ const following = async (req, res) => {
 };
 
 // bookmark post
-const bookmark = async (req, res) => {
+const bookmarkPost = async (req, res) => {
   try {
+
+
+
     res.status(200).json({
       success: true,
       msg: "",
@@ -110,4 +113,4 @@ const bookmark = async (req, res) => {
   }
 };
 
-module.exports = { follower, following, bookmark };
+module.exports = { follower, following, bookmarkPost };
