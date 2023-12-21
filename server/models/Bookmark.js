@@ -7,7 +7,7 @@ const bookmarkSchema = new schema(
       type: String,
       required: true,
     },
-    post: [{ required: true }],
+    post: [],
   },
   {
     timestamps: true,
