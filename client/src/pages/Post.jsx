@@ -13,3 +13,7 @@ export default function Post() {
     </main>
   );
 }
+
+
+// solve that empty space on home header
+// 

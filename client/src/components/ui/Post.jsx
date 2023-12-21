@@ -52,6 +52,7 @@ export default function Post({ id, user_id, timestamp, content, isRecommend }) {
           <MoreVertical className=" h-5 w-5" />
         </div>
 
+        {/* move this stuff to a seperate component, so it can be reused on postBody page */}
         <div className="mt-4 flex items-center justify-between ">
           <Link
             to=""
@@ -74,6 +75,7 @@ export default function Post({ id, user_id, timestamp, content, isRecommend }) {
             <Share className="h-5 w-5 cursor-pointer" />
           </div>
         </div>
+
       </div>
     </div>
   );
