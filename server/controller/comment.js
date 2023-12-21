@@ -135,6 +135,7 @@ const getAllComments = async (req, res) => {
   }
 };
 
+// like comment
 const likeComment = async (req, res) => {
   try {
     // we need the likeUserId

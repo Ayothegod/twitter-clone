@@ -60,6 +60,7 @@ const getSinglePost = async (req, res) => {
   }
 };
 
+// delete post
 const deletePost = async (req, res) => {
   try {
     const { postId } = req.params;
@@ -80,7 +81,7 @@ const deletePost = async (req, res) => {
         user.postsId.pull(postId);
         await user.save();
       }
-    })
+    });
 
     const deletedPost = await Post.deleteOne({ _id: postId });
     if (!deletedPost) {
@@ -98,6 +99,7 @@ const deletePost = async (req, res) => {
   }
 };
 
+// get all post for a single user
 const getAllPostsFromUser = async (req, res) => {
   try {
     const { authorId } = req.params;
@@ -124,6 +126,7 @@ const getAllPostsFromUser = async (req, res) => {
   }
 };
 
+// get all post - general
 const getAllPosts = async (req, res) => {
   try {
     const allPosts = await Post.find();
@@ -140,6 +143,7 @@ const getAllPosts = async (req, res) => {
   }
 };
 
+// like posts
 const likePost = async (req, res) => {
   try {
     // we need the likeUserId
@@ -176,6 +180,7 @@ const likePost = async (req, res) => {
   }
 };
 
+// im not touching retweet enpoint now - lol
 const retweetPost = (req, res) => {
   try {
     // I dont want to even think about this endpoint now at all
@@ -196,7 +201,3 @@ module.exports = {
   likePost,
   retweetPost,
 };
-
-// if (!removeDeletedPostIdFromProfile.postsId.includes(postId)) {
-//     return res.status(401).json("post unliked successfully");
-//   }
