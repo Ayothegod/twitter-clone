@@ -2,6 +2,7 @@ const User = require("../models/User");
 const Post = require("../models/Post");
 const Comment = require("../models/Comment");
 
+// follow me => followers
 const follower = async (req, res) => {
   try {
     const { username } = req.params;
@@ -35,12 +36,12 @@ const follower = async (req, res) => {
       myAccount,
     });
   } catch (error) {
-    console.log(error);
     res.status(500);
     throw new Error("Something went wrong");
   }
 };
 
+// follow others => following
 const following = async (req, res) => {
   try {
     const { followedUsername } = req.params;
@@ -60,24 +61,22 @@ const following = async (req, res) => {
     const followedAccount = await User.findOne({ username: followedUsername });
 
     // check if my username is on his followers
-    if (followedAccount.followers.includes(myUsername) || myAccount.following.includes(followedUsername)) {
+    if (
+      followedAccount.followers.includes(myUsername) ||
+      myAccount.following.includes(followedUsername)
+    ) {
       followedAccount.followers.pull(myUsername);
       await followedAccount.save();
 
       myAccount.following.pull(followedUsername);
       await myAccount.save();
-      return res.status(401).json(`you have unfollowed ${followedUsername} and ${followedUsername} is no longer on your followings`);
-    }
 
-    // // check his username is on my following
-    // if (myAccount.following.includes(followedUsername)) {
-    //   myAccount.following.pull(followedUsername);
-    //   await myAccount.save();
-    //   return res.status(401).json({
-    //     success: true,
-    //     msg: `${followedUsername} is no longer on your followings`,
-    //   });
-    // }
+      return res
+        .status(401)
+        .json(
+          `you have unfollowed ${followedUsername} and ${followedUsername} is no longer on your followings`
+        );
+    }
 
     // follow him/her
     followedAccount.followers.push(myUsername);
@@ -92,7 +91,6 @@ const following = async (req, res) => {
       msg: `you have followed ${followedUsername} and ${followedUsername} has been added to your following`,
     });
   } catch (error) {
-    console.log(error);
     res.status(500);
     throw new Error("Something went wrong");
   }
@@ -112,51 +110,3 @@ const bookmark = async (req, res) => {
 };
 
 module.exports = { follower, following, bookmark };
-
-// {
-//     "success": true,
-//     "msg": "user created successfully",
-//     "user": {
-//       "fullname": "Toheeb",
-//       "email": "",
-//       "username": "Toheeb",
-//       "password": "$2b$10$Qdo..FY2g75xhtVhnFerN.yLgtad0k99JeHkcXaIGyDrEpA0p54eK",
-//       "followers": [],
-//       "following": [],
-//       "profilePhoto": "",
-//       "coverPhoto": "",
-//       "location": "",
-//       "profession": "",
-//       "bio": "",
-//       "website": "",
-//       "postsId": [],
-//       "_id": "658477bb87a9582f09e0cf68",
-//       "createdAt": "2023-12-21T17:37:00.025Z",
-//       "updatedAt": "2023-12-21T17:37:00.025Z",
-//       "__v": 0
-//     }
-//   }
-
-// {
-//     "success": true,
-//     "msg": "user created successfully",
-//     "user": {
-//       "fullname": "Aiiomide",
-//       "email": "",
-//       "username": "Aiiomide",
-//       "password": "$2b$10$b13sTsp1fyK5gU7CtKDhYe3YjBhM/vSV9TptAriPIdO5sVj97Z.yi",
-//       "followers": [],
-//       "following": [],
-//       "profilePhoto": "",
-//       "coverPhoto": "",
-//       "location": "",
-//       "profession": "",
-//       "bio": "",
-//       "website": "",
-//       "postsId": [],
-//       "_id": "658477e4f8c0780939d4cf03",
-//       "createdAt": "2023-12-21T17:37:40.926Z",
-//       "updatedAt": "2023-12-21T17:37:40.926Z",
-//       "__v": 0
-//     }
-//   }
