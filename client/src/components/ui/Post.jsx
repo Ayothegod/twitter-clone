@@ -38,7 +38,7 @@ export default function Post({ id, user_id, timestamp, content, isRecommend }) {
             <span className="text-sm text-gray-400 font-semibold">•</span>
             <div className="text-sm text-gray-400 font-semibold">
               {/* <p>{timestamp.toString()}</p> */}
-              1hour
+              1h
             </div>
 
             {/* move this tab outside or make it absolute */}
@@ -55,16 +55,17 @@ export default function Post({ id, user_id, timestamp, content, isRecommend }) {
         <div className="mt-4 flex items-center justify-between ">
           <Link
             to=""
-            className="text-slate-500 flex items-center gap-1 cursor-pointer"
+            className="text-slate-500 flex items-center gap-1 cursor-pointer hover:text-action"
           >
             <MessageCircle className="h-5 w-5 " />
-            {<p>0</p>}
+            {/* this bracket is to display dynamic comment/like/retweet cahnge */}
+            {<p>0</p> } 
           </Link>
-          <div className="text-slate-500 flex items-center gap-1 cursor-pointer">
+          <div className="text-slate-500 flex items-center gap-1 cursor-pointer hover:text-green-600">
             <Repeat2 className="h-5 w-5 " />
             {<p>0</p>}
           </div>
-          <div className="text-slate-500 flex items-center gap-1 cursor-pointer">
+          <div className="text-slate-500 flex items-center gap-1 cursor-pointer hover:text-red-600">
             <Heart className="h-5 w-5 " />
             {<p>0</p>}
           </div>
