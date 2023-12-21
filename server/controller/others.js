@@ -43,35 +43,53 @@ const follower = async (req, res) => {
 
 const following = async (req, res) => {
   try {
-    const { username } = req.params;
-    const { followerUsername } = req.body;
-    if (!username || !followerUsername) {
+    const { followedUsername } = req.params;
+    const { myUsername } = req.body;
+    if (!followedUsername || !myUsername) {
       return res
         .status(401)
-        .json("you must provide username and followerUsername");
+        .json("you must provide followedUsername and myUsername");
     }
-    if (username === followerUsername) {
+    if (myUsername === followedUsername) {
       return res.status(400).json(null);
     }
 
     // find my account
-    const myAccount = await User.findOne({ username });
+    const myAccount = await User.findOne({ username: myUsername });
+    // find his/her account
+    const followedAccount = await User.findOne({ username: followedUsername });
 
-    // check if followerUsername is included in followers array, if yes unfollow
-    if (myAccount.followers.includes(followerUsername)) {
-      myAccount.followers.pull(followerUsername);
-      await post.save();
-      return res.status(401).json(`${followerUsername} has unfollowed you`);
+    // check if my username is on his followers
+    if (followedAccount.followers.includes(myUsername) || myAccount.following.includes(followedUsername)) {
+      followedAccount.followers.pull(myUsername);
+      await followedAccount.save();
+
+      myAccount.following.pull(followedUsername);
+      await myAccount.save();
+      return res.status(401).json(`you have unfollowed ${followedUsername} and ${followedUsername} is no longer on your followings`);
     }
 
-    // follow me
-    myAccount.followers.push(followerUsername);
+    // // check his username is on my following
+    // if (myAccount.following.includes(followedUsername)) {
+    //   myAccount.following.pull(followedUsername);
+    //   await myAccount.save();
+    //   return res.status(401).json({
+    //     success: true,
+    //     msg: `${followedUsername} is no longer on your followings`,
+    //   });
+    // }
+
+    // follow him/her
+    followedAccount.followers.push(myUsername);
+    await followedAccount.save();
+
+    // add him/her on my following
+    myAccount.following.push(followedUsername);
     await myAccount.save();
 
     res.status(200).json({
       success: true,
-      msg: `${followerUsername} has followed you`,
-      myAccount,
+      msg: `you have followed ${followedUsername} and ${followedUsername} has been added to your following`,
     });
   } catch (error) {
     console.log(error);

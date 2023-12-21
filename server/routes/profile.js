@@ -9,6 +9,6 @@ router.patch("/profile/update/:username", isAuth, updateUserProfile)
 router.delete("/profile/delete/:username", isAuth, deleteUserProfile)
 
 router.post("/profile/:username/follow-me", isAuth, follower)
-router.post("/profile/:username/i-follow", isAuth, following)
+router.post("/profile/:followedUsername/i-follow", isAuth, following)
 
 module.exports = router;
