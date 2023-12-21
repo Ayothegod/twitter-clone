@@ -32,6 +32,10 @@ const postSchema = new schema(
     retweetCount: {
       type: [String],
     },
+    bookmarked: {
+      type: Boolean,
+      default: false
+    },
   },
   {
     timestamps: true,

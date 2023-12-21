@@ -113,25 +113,13 @@ const bookmarkPost = async (req, res) => {
     // add to bookmark collection
     const bookmark = await Bookmark.create({
         bookmarkAuthorId: bookmarkAuthorId,
-        post: [post]
+        post: post
     })
-
-    // if (myAccount.followers.includes(followerUsername)) {
-    //     myAccount.followers.pull(followerUsername);
-    //     await myAccount.save();
-    //     return res.status(401).json(`${followerUsername} has unfollowed you`);
-    //   }
-
-    //   await new Bookmark(post)
-    //   await Bookmark.save
-  
-      // follow me
-    //   myAccount.followers.push(followerUsername);
-    //   await myAccount.save();
+    post.bookmarked = true
+    await post.save()
 
     res.status(200).json({
       success: true,
-      msg: "",
       bookmark,
     });
   } catch (error) {
@@ -141,4 +129,28 @@ const bookmarkPost = async (req, res) => {
   }
 };
 
-module.exports = { follower, following, bookmarkPost };
+// get bookmark for a single user
+const getBookmark = async (req, res) => {
+  try {
+    const { bookmarkAuthorId } = req.params;
+    if (!bookmarkAuthorId) {
+      return res
+        .status(401)
+        .json("provide bookmarkAuthorId to retrieve bookmarks");
+    }
+
+    const bookmarks = await Bookmark.find({bookmarkAuthorId: bookmarkAuthorId})
+
+    res.status(200).json({
+      success: true,
+      msg: "bookmarks retrieved successfully",
+      bookmarks,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500);
+    throw new Error("Something went wrong");
+  }
+};
+
+module.exports = { follower, following, bookmarkPost, getBookmark };
