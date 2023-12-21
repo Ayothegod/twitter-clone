@@ -12,7 +12,11 @@ const getUserProfile = async (req, res) => {
     if (!userProfile) {
       return res.status(401).json("user profile not found");
     }
-    res.json({ user: userProfile });
+    res.json({
+      success: true,
+      msg: "user profile retrieved successfully",
+      userProfile: userProfile
+    });
   } catch (error) {
     res.status(500);
     throw new Error("Something went wrong");
@@ -62,7 +66,10 @@ const updateUserProfile = async (req, res) => {
       }
     );
 
-    res.status(200).json("User profile has been updated successfully!");
+    res.status(200).json({
+      success: true,
+      msg: "user profile has been updated successfully",
+    });
   } catch (error) {
     res.status(500);
     throw new Error("Something went wrong");
@@ -91,7 +98,10 @@ const deleteUserProfile = async (req, res) => {
     const deletedUser = await User.deleteOne({ username: username });
 
     req.session.destroy();
-    res.status(201).json("User profile has been deleted successfully.");
+    res.status(201).json({
+      success: true,
+      msg: "user profile has been deleted successfully",
+    });
   } catch (error) {
     res.status(500);
     throw new Error("Something went wrong");

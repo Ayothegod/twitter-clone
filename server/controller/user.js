@@ -35,7 +35,11 @@ const registerUser = async (req, res) => {
     });
 
     req.session.isAuth = true;
-    res.status(201).json(user);
+    res.status(201).json({
+      success: true,
+      msg: "user created successfully",
+      user: user
+    });
   } catch (error) {
     res.status(500);
     throw new Error("Something went wrong");
@@ -68,7 +72,11 @@ const loginUser = async (req, res) => {
     }
 
     req.session.isAuth = true;
-    res.status(201).json(checkForUser);
+    res.status(201).json({
+      success: true,
+      msg: "user retrieved successfully",
+      user: checkForUser
+    });
   } catch (error) {
     res.status(500);
     throw new Error("Something went wrong");

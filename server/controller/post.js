@@ -30,7 +30,7 @@ const createPost = async (req, res) => {
     profileData.postsId.push(postId);
     await profileData.save();
 
-    res.status(201).json({ msg: "post created successfully", post: post });
+    res.status(201).json({success: true, msg: "post created successfully", post: post });
   } catch (error) {
     res.status(500);
     throw new Error("Something went wrong");

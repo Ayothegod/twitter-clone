@@ -37,6 +37,7 @@ const createComment = async (req, res) => {
     await postData.save();
 
     res.status(201).json({
+      success: true,
       msg: "comment created successfully",
       comment: comment,
     });
@@ -49,10 +50,6 @@ const createComment = async (req, res) => {
 const getSingleComment = async (req, res) => {
   try {
     // postId and commentId
-    // {
-    //   "postId":"6582c2a3c5d33a27c1f8ae46",
-    //   "commentId":"658307a5702495ee43a9b005"
-    // }
 
     const { postId, commentId } = req.params;
     if (!postId || !commentId) {
