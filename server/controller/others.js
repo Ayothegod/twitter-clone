@@ -112,11 +112,11 @@ const bookmarkPost = async (req, res) => {
 
     // add to bookmark collection
     const bookmark = await Bookmark.create({
-        bookmarkAuthorId: bookmarkAuthorId,
-        post: post
-    })
-    post.bookmarked = true
-    await post.save()
+      bookmarkAuthorId: bookmarkAuthorId,
+      post: post,
+    });
+    post.bookmarked = true;
+    await post.save();
 
     res.status(200).json({
       success: true,
@@ -139,11 +139,12 @@ const getBookmark = async (req, res) => {
         .json("provide bookmarkAuthorId to retrieve bookmarks");
     }
 
-    const bookmarks = await Bookmark.find({bookmarkAuthorId: bookmarkAuthorId})
+    const bookmarks = await Bookmark.find({
+      bookmarkAuthorId: bookmarkAuthorId,
+    });
 
     res.status(200).json({
       success: true,
-      msg: "bookmarks retrieved successfully",
       bookmarks,
     });
   } catch (error) {
@@ -153,4 +154,33 @@ const getBookmark = async (req, res) => {
   }
 };
 
-module.exports = { follower, following, bookmarkPost, getBookmark };
+// delete
+const deleteBookmark = async (req, res) => {
+  try {
+    const { bookmarkAuthorId, bookmarkId } = req.params;
+    if (!bookmarkAuthorId || !bookmarkId) {
+      return res
+        .status(401)
+        .json("provide bookmarkAuthorId and bookmarkId to delete bookmark");
+    }
+
+    const deletedBookmark = await Bookmark.deleteOne({ _id: bookmarkId });
+
+    res.status(200).json({
+      success: true,
+      deletedBookmark,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500);
+    throw new Error("Something went wrong");
+  }
+};
+
+module.exports = {
+  follower,
+  following,
+  bookmarkPost,
+  getBookmark,
+  deleteBookmark,
+};
