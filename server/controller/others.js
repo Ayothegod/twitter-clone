@@ -100,12 +100,39 @@ const following = async (req, res) => {
 // bookmark post
 const bookmarkPost = async (req, res) => {
   try {
+    const { bookmarkAuthorId, postId } = req.body;
+    if (!bookmarkAuthorId || !postId) {
+      return res
+        .status(401)
+        .json("provide bookmarkAuthorId and postId to bookmark post");
+    }
 
+    // find the post
+    const post = await Post.findById({ _id: postId });
 
+    // add to bookmark collection
+    const bookmark = await Bookmark.create({
+        bookmarkAuthorId: bookmarkAuthorId,
+        post: [post]
+    })
+
+    // if (myAccount.followers.includes(followerUsername)) {
+    //     myAccount.followers.pull(followerUsername);
+    //     await myAccount.save();
+    //     return res.status(401).json(`${followerUsername} has unfollowed you`);
+    //   }
+
+    //   await new Bookmark(post)
+    //   await Bookmark.save
+  
+      // follow me
+    //   myAccount.followers.push(followerUsername);
+    //   await myAccount.save();
 
     res.status(200).json({
       success: true,
       msg: "",
+      bookmark,
     });
   } catch (error) {
     console.log(error);
